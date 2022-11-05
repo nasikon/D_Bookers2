@@ -5,6 +5,7 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     @user = @book.user
     @book_new = Book.new
+    @bookcomment = Bookcomment.new 
   end
 
   def index
@@ -41,18 +42,18 @@ class BooksController < ApplicationController
     @book.destroy
     redirect_to books_path, notice: "successfully delete book!"
   end
-
+  
   private
 
   def book_params
     params.require(:book).permit(:title, :body)
   end
 
-   def ensure_correct_user
+  def ensure_correct_user
     @book = Book.find(params[:id])
     unless @book.user == current_user
       redirect_to books_path
     end
-   end
+  end
 
 end

@@ -8,7 +8,7 @@
       <%= render 'form', book: @book_new %>
     </div>
     <div class='col-md-8 offset-md-1'>
-      
+
   		<h2>Book detail</h2>
   		<table class='table'>
   		  <tr>
@@ -19,12 +19,15 @@
           </td>
           <td><%= link_to @book.title, @book %></td>
           <td><%= @book.body %></td>
+          <td><%= render "favorites/fav", book: @book %></td>
            <% if @book.user ==current_user %>
             <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success" %></td>
             <td><%= link_to 'Destroy', @book, method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger"%></td>
-           <% end %>  
+           <% end %>
         </tr>
       </table>
+       <%= render "bookcomments/index", book: @book %>
+       <%= render "bookcomments/form", book: @book, bookcomment: @bookcomment %>
     </div>
   </div>
 </div>
