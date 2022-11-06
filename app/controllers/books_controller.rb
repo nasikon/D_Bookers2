@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
   before_action :ensure_correct_user, only: [:update, :edit, :destroy]
+  #ログインユーザーと投稿者が一致しない場合には、上記３つの操作ができない。
 
   def show
     @book = Book.find(params[:id])
@@ -20,7 +21,7 @@ class BooksController < ApplicationController
       redirect_to book_path(@book.id), notice: "You have created book successfully."
     else
       @books = Book.all
-      render 'index'
+      render :index
     end
   end
 
